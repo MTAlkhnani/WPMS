@@ -1,12 +1,19 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class Package extends StatelessWidget {
+class PackageScreen extends StatelessWidget {
   static const String id = 'packages_screen';
-  const Package({super.key});
+  const PackageScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Text('This is the package page'),
+        ),
+      ),
+    );
   }
 }
