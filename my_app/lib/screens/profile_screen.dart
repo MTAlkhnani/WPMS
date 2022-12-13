@@ -10,10 +10,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: ,
-        child: ,
-      )
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlueAccent,
+      ),
     );
   }
 }
