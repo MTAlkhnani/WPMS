@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'chat_screen.dart';
+import 'customer_screen.dart';
 import '../components/RoundedButton.dart';
 import '../constants.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -64,7 +64,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   final newUser = await _auth.createUserWithEmailAndPassword(
                       email: email, password: password);
                   if (newUser != null) {
-                    Navigator.pushNamed(context, ChatScreen.id);
+                    Navigator.pushNamed(context, CustomerScreen.id);
                     showSpinner = false;
                   }
                 } catch (e) {

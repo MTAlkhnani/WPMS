@@ -1,5 +1,5 @@
 import '/components/RoundedButton.dart';
-import 'chat_screen.dart';
+import 'customer_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -26,15 +26,20 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            // Hero(
-            //   tag: 'logo',
-            //   child: Container(
-            //     height: 200.0,
-            //     child: Image.asset('images/logo.png'),
-            //   ),
-            // ),
+            Hero(
+              tag: 'logo',
+              child: Container(
+                child: Text(
+                  '',
+                  style: TextStyle(
+                      fontSize: 42.0,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black),
+                ),
+              ),
+            ),
             SizedBox(
-              height: 48.0,
+              height: 20.0,
             ),
             TextField(
               keyboardType: TextInputType.emailAddress,
@@ -66,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       email: email, password: password);
                   if (user != null) {
                     showSpinner = false;
-                    Navigator.pushNamed(context, ChatScreen.id);
+                    Navigator.pushNamed(context, CustomerScreen.id);
                   }
                 } catch (e) {
                   print(e);
