@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({Key? key}) : super(key: key);
+  AppDrawer({Key? key}) : super(key: key);
+  final _auth = auth.FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +13,6 @@ class AppDrawer extends StatelessWidget {
           AppBar(
             elevation: 1,
             backgroundColor: const Color(0xFFF5F6F9),
-            title: Text(
-              'Built for your beauty',
-              style: Theme.of(context).textTheme.headline1,
-            ),
             centerTitle: true,
             automaticallyImplyLeading: false, // back button: false
           ),
@@ -48,8 +46,10 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Logout'),
             onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pushReplacementNamed('/');
+              _auth.signOut();
+              Navigator.pop(context);
+              Navigator.pop(context);
+              Navigator.pop(context);
             },
           ),
         ],

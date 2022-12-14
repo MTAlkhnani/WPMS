@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:my_app/screens/package_state.dart';
 
 class PackagesScreen extends StatelessWidget {
   static const String id = 'packages_screen';
@@ -8,10 +9,13 @@ class PackagesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Text('This is the packages page'),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Send Packages'),
+        ),
+        body: const Center(
+          child: PackagesState(),
         ),
       ),
     );

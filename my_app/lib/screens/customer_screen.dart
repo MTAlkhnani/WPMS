@@ -1,4 +1,5 @@
 import 'package:another_stepper/widgets/vertical_stepper.dart';
+import 'package:my_app/screens/package_state.dart';
 import 'package:my_app/screens/packages_screen.dart';
 import 'package:my_app/screens/profile_screen.dart';
 import 'package:my_app/screens/wallet_screen.dart';
@@ -11,6 +12,8 @@ import 'welcome_screen.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' as db;
 
 class CustomerScreen extends StatefulWidget {
   static const String id = 'customer_screen';
@@ -22,6 +25,7 @@ class CustomerScreen extends StatefulWidget {
 class _CustomerScreenState extends State<CustomerScreen>
     with TickerProviderStateMixin {
   final _auth = auth.FirebaseAuth.instance;
+  final _firestore = db.FirebaseFirestore.instance;
   auth.User? loggedInUser;
   String? messeageText;
   bool result = false;
@@ -37,7 +41,7 @@ class _CustomerScreenState extends State<CustomerScreen>
       iconWidget: Container(
         padding: const EdgeInsets.all(8),
         decoration: const BoxDecoration(
-            color: Colors.green,
+            color: Colors.red,
             borderRadius: BorderRadius.all(Radius.circular(30))),
         child: const Icon(Icons.navigate_next_sharp, color: Colors.white),
       ),
@@ -53,7 +57,7 @@ class _CustomerScreenState extends State<CustomerScreen>
       iconWidget: Container(
         padding: const EdgeInsets.all(8),
         decoration: const BoxDecoration(
-            color: Colors.green,
+            color: Colors.red,
             borderRadius: BorderRadius.all(Radius.circular(30))),
         child: const Icon(Icons.navigate_next_sharp, color: Colors.white),
       ),
@@ -69,7 +73,7 @@ class _CustomerScreenState extends State<CustomerScreen>
       iconWidget: Container(
         padding: const EdgeInsets.all(8),
         decoration: const BoxDecoration(
-            color: Colors.green,
+            color: Colors.red,
             borderRadius: BorderRadius.all(Radius.circular(30))),
         child: const Icon(Icons.navigate_next_sharp, color: Colors.white),
       ),
@@ -85,7 +89,7 @@ class _CustomerScreenState extends State<CustomerScreen>
       iconWidget: Container(
         padding: const EdgeInsets.all(8),
         decoration: const BoxDecoration(
-            color: Colors.green,
+            color: Colors.red,
             borderRadius: BorderRadius.all(Radius.circular(30))),
         child: const Icon(Icons.navigate_next_sharp, color: Colors.white),
       ),
@@ -96,6 +100,14 @@ class _CustomerScreenState extends State<CustomerScreen>
     // TODO: implement initState
     super.initState();
     getCurrentUser();
+  }
+
+  void getPackages() async {
+    await for (var snapshot in _firestore.collection('packages').snapshots()) {
+      for (var message in snapshot.docs) {
+        print(message.data().cast());
+      }
+    }
   }
 
 // this is how to get the current user
@@ -152,6 +164,19 @@ class _CustomerScreenState extends State<CustomerScreen>
         //leading: null,
         title: Text('Packages'),
         backgroundColor: Colors.lightBlueAccent,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              child: Icon(
+                FontAwesomeIcons.plus,
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, PackagesScreen.id);
+              },
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(child: content()),
     );
@@ -225,6 +250,9 @@ class _CustomerScreenState extends State<CustomerScreen>
                   decoration: InputDecoration(
                       border: OutlineInputBorder(borderSide: BorderSide.none),
                       hintText: 'e.g. #12345678'),
+                  onChanged: (value) {
+                    getPackages();
+                  },
                 ),
               ),
               SizedBox(
